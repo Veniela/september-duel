@@ -31,6 +31,7 @@
         width: min(1200px, 100vw);
         aspect-ratio: 16 / 9;
         overflow: hidden;
+
         background: linear-gradient(
           to bottom,
           #30234c 0%,
@@ -40,18 +41,22 @@
         );
       }
 
-      /* ---------- SKY ---------- */
+      /* =========================================
+   SKY
+   ========================================= */
 
       .sky-night {
         position: absolute;
         inset: 0;
         opacity: 0;
+
         background: linear-gradient(
           to bottom,
           #090d27 0%,
           #17173c 55%,
           #312044 100%
         );
+
         transition: opacity 3s ease;
         pointer-events: none;
         z-index: 1;
@@ -65,12 +70,18 @@
         position: absolute;
         width: 150px;
         height: 150px;
+
         border-radius: 50%;
+
         right: 100px;
         top: 80px;
+
         background: #ffb35c;
+
         box-shadow: 0 0 50px #ff9c4b;
+
         transition: opacity 3s ease;
+
         z-index: 2;
       }
 
@@ -80,15 +91,23 @@
 
       .moon {
         position: absolute;
+
         width: 95px;
         height: 95px;
+
         right: 125px;
         top: 95px;
+
         border-radius: 50%;
+
         background: #fff4c9;
+
         box-shadow: 0 0 35px rgba(255, 244, 201, 0.7);
+
         opacity: 0;
+
         transition: opacity 3s ease;
+
         z-index: 3;
       }
 
@@ -98,20 +117,28 @@
 
       .moon::after {
         content: "";
+
         position: absolute;
+
         width: 90px;
         height: 90px;
+
         left: 25px;
         top: -10px;
+
         border-radius: 50%;
+
         background: #10132f;
       }
 
       .stars {
         position: absolute;
         inset: 0;
+
         opacity: 0;
+
         transition: opacity 3s ease;
+
         z-index: 2;
       }
 
@@ -121,11 +148,16 @@
 
       .star {
         position: absolute;
+
         width: 5px;
         height: 5px;
+
         background: white;
+
         border-radius: 50%;
+
         box-shadow: 0 0 8px white;
+
         animation: twinkle 1.5s infinite alternate;
       }
 
@@ -134,28 +166,37 @@
           opacity: 0.3;
           transform: scale(0.7);
         }
+
         to {
           opacity: 1;
           transform: scale(1.3);
         }
       }
 
-      /* ---------- BACKGROUND ---------- */
+      /* =========================================
+   BACKGROUND
+   ========================================= */
 
       .mountains {
         position: absolute;
+
         bottom: 150px;
         left: 0;
+
         width: 100%;
         height: 250px;
+
         z-index: 3;
       }
 
       .mountain {
         position: absolute;
+
         bottom: 0;
+
         width: 0;
         height: 0;
+
         border-left: 230px solid transparent;
         border-right: 230px solid transparent;
         border-bottom: 300px solid #37283a;
@@ -164,14 +205,17 @@
       .m1 {
         left: -100px;
       }
+
       .m2 {
         left: 280px;
         border-bottom-color: #302337;
       }
+
       .m3 {
         right: -80px;
         border-bottom-color: #34253a;
       }
+
       .m4 {
         right: 260px;
         border-bottom-color: #3c2940;
@@ -179,18 +223,24 @@
 
       .forest {
         position: absolute;
+
         bottom: 100px;
         left: 0;
+
         width: 100%;
         height: 170px;
+
         z-index: 4;
       }
 
       .tree {
         position: absolute;
+
         bottom: 0;
+
         width: 0;
         height: 0;
+
         border-left: 45px solid transparent;
         border-right: 45px solid transparent;
         border-bottom: 150px solid #211b29;
@@ -199,26 +249,32 @@
       .t1 {
         left: 2%;
       }
+
       .t2 {
         left: 13%;
         transform: scale(0.8);
       }
+
       .t3 {
         left: 27%;
         transform: scale(1.2);
       }
+
       .t4 {
         left: 43%;
         transform: scale(0.75);
       }
+
       .t5 {
         left: 58%;
         transform: scale(1.1);
       }
+
       .t6 {
         left: 74%;
         transform: scale(0.8);
       }
+
       .t7 {
         left: 88%;
         transform: scale(1.3);
@@ -226,32 +282,44 @@
 
       .ground {
         position: absolute;
+
         bottom: 0;
         left: 0;
+
         width: 100%;
         height: 120px;
+
         background:
           radial-gradient(circle at 20% 30%, #a85b3d 0 2px, transparent 3px),
           radial-gradient(circle at 70% 60%, #8d4d35 0 2px, transparent 3px),
           #39232a;
+
         z-index: 5;
       }
 
-      /* ---------- LEAVES ---------- */
+      /* =========================================
+   LEAVES
+   ========================================= */
 
       .leaves {
         position: absolute;
         inset: 0;
+
         pointer-events: none;
+
         z-index: 20;
       }
 
       .leaf {
         position: absolute;
+
         width: 17px;
         height: 9px;
+
         border-radius: 100% 0 100% 0;
+
         background: #d76b35;
+
         animation: fall linear infinite;
       }
 
@@ -300,27 +368,37 @@
           top: -30px;
           transform: translateX(0) rotate(0deg);
         }
+
         50% {
           transform: translateX(100px) rotate(180deg);
         }
+
         100% {
           top: 100%;
+
           transform: translateX(-100px) rotate(360deg);
         }
       }
 
-      /* ---------- HUD ---------- */
+      /* =========================================
+   HUD
+   ========================================= */
 
       .hud {
         position: absolute;
+
         left: 35px;
         right: 35px;
         top: 25px;
+
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         z-index: 50;
+
         color: white;
+
         font-weight: 900;
       }
 
@@ -330,24 +408,34 @@
 
       .player-name {
         font-size: 24px;
+
         margin-bottom: 8px;
+
         text-shadow: 0 3px 4px #000;
       }
 
       .hp {
         height: 24px;
+
         padding: 3px;
+
         background: #160f16;
+
         border: 3px solid #fff1cf;
+
         border-radius: 20px;
+
         box-shadow: 0 4px 12px #0008;
       }
 
       .hp-inner {
         width: 100%;
         height: 100%;
+
         border-radius: 10px;
+
         background: #63d45d;
+
         transition: width 0.7s ease;
       }
 
@@ -361,19 +449,28 @@
 
       .round {
         padding: 9px 18px;
+
         background: rgba(20, 12, 20, 0.65);
+
         border: 2px solid #ffe4b0;
+
         border-radius: 14px;
+
         font-size: 17px;
       }
 
-      /* ---------- CHARACTERS ---------- */
+      /* =========================================
+   CHARACTERS
+   ========================================= */
 
       .character {
         position: absolute;
+
         bottom: 120px;
+
         width: 300px;
         height: 350px;
+
         z-index: 10;
       }
 
@@ -388,29 +485,34 @@
       .character svg {
         width: 100%;
         height: 100%;
+
         overflow: visible;
       }
 
       .potato-body {
         fill: #b8793f;
+
         stroke: #633b25;
         stroke-width: 7;
       }
 
       .avocado-shell {
         fill: #244f32;
+
         stroke: #10291a;
         stroke-width: 7;
       }
 
       .avocado-flesh {
         fill: #9ecb63;
+
         stroke: #487c35;
         stroke-width: 5;
       }
 
       .pit {
         fill: #9a5b31;
+
         stroke: #60361e;
         stroke-width: 5;
       }
@@ -423,10 +525,13 @@
         fill: #2a1114;
       }
 
-      /* ---------- GUNS ---------- */
+      /* =========================================
+   GUNS
+   ========================================= */
 
       .gun {
         fill: #34313b;
+
         stroke: #17151b;
         stroke-width: 5;
       }
@@ -437,8 +542,10 @@
 
       .bullet {
         fill: #ffe15a;
+
         stroke: #ff9e28;
         stroke-width: 3;
+
         opacity: 0;
       }
 
@@ -449,6 +556,7 @@
       @keyframes shootBullet {
         0% {
           opacity: 1;
+
           transform: translateX(0) scale(0.6);
         }
 
@@ -458,11 +566,14 @@
 
         100% {
           opacity: 0;
+
           transform: translateX(510px) scale(1.3);
         }
       }
 
-      /* ---------- HIT ---------- */
+      /* =========================================
+   HIT
+   ========================================= */
 
       .damage {
         animation: damage 0.15s 5;
@@ -490,6 +601,7 @@
 
         100% {
           transform: rotate(75deg) translateY(90px);
+
           opacity: 0.45;
         }
       }
@@ -535,7 +647,9 @@
         }
       }
 
-      /* ---------- CRY ---------- */
+      /* =========================================
+   CRY
+   ========================================= */
 
       .tear {
         opacity: 0;
@@ -557,7 +671,9 @@
         }
       }
 
-      /* ---------- FLASH ---------- */
+      /* =========================================
+   FLASH
+   ========================================= */
 
       .muzzle-flash {
         opacity: 0;
@@ -579,20 +695,30 @@
         }
       }
 
-      /* ---------- WINNER ---------- */
+      /* =========================================
+   WINNER
+   ========================================= */
 
       .winner-screen {
         position: absolute;
         inset: 0;
+
         display: flex;
         flex-direction: column;
+
         align-items: center;
         justify-content: center;
+
         background: rgba(10, 7, 18, 0.72);
+
         backdrop-filter: blur(5px);
+
         opacity: 0;
+
         pointer-events: none;
+
         transition: opacity 0.7s ease;
+
         z-index: 100;
       }
 
@@ -603,13 +729,18 @@
 
       .winner-title {
         color: #fff1c9;
+
         font-size: clamp(42px, 8vw, 90px);
+
         font-weight: 1000;
+
         text-align: center;
+
         text-shadow:
           0 6px 0 #351b20,
           0 0 25px #ffb04c,
           0 0 60px #ff7d3c;
+
         animation: winnerPop 0.8s cubic-bezier(0.17, 0.67, 0.32, 1.3);
       }
 
@@ -625,15 +756,25 @@
 
       .play-again {
         margin-top: 30px;
+
         border: 0;
+
         border-radius: 15px;
+
         padding: 16px 34px;
+
         background: #ffb347;
+
         color: #29151b;
+
         font-size: 20px;
+
         font-weight: 900;
+
         cursor: pointer;
+
         box-shadow: 0 7px 0 #8d492d;
+
         transition:
           transform 0.15s,
           box-shadow 0.15s;
@@ -641,38 +782,55 @@
 
       .play-again:hover {
         transform: translateY(-3px);
+
         box-shadow: 0 10px 0 #8d492d;
       }
 
       .play-again:active {
         transform: translateY(5px);
+
         box-shadow: 0 2px 0 #8d492d;
       }
 
-      /* ---------- START ---------- */
+      /* =========================================
+   START
+   ========================================= */
 
       .start-screen {
         position: absolute;
         inset: 0;
+
         z-index: 120;
+
         display: flex;
+
         align-items: center;
         justify-content: center;
+
         background: rgba(10, 7, 18, 0.55);
       }
 
       .start-button {
         border: 0;
+
         border-radius: 20px;
+
         padding: 20px 42px;
+
         background: #ffe09a;
+
         color: #301a1d;
+
         font-size: 26px;
+
         font-weight: 1000;
+
         cursor: pointer;
+
         box-shadow:
           0 8px 0 #9c5734,
           0 0 40px rgba(255, 180, 80, 0.5);
+
         animation: pulse 1.3s infinite alternate;
       }
 
@@ -680,6 +838,7 @@
         from {
           transform: scale(1);
         }
+
         to {
           transform: scale(1.06);
         }
@@ -689,27 +848,348 @@
         display: none;
       }
 
-      /* ---------- MUSIC ---------- */
+      /* =========================================
+   MUSIC
+   ========================================= */
 
       .music {
         position: absolute;
+
         left: 50%;
         bottom: 24px;
+
         transform: translateX(-50%);
+
         z-index: 60;
+
         padding: 8px 15px;
+
         border-radius: 20px;
+
         background: rgba(15, 10, 15, 0.55);
+
         color: white;
+
         font-size: 13px;
+      }
+
+      /* =========================================
+   📱 MOBILE
+   ========================================= */
+
+      @media (max-width: 700px) {
+        html,
+        body {
+          width: 100%;
+          height: 100%;
+
+          overflow: hidden;
+        }
+
+        body {
+          background: #130d19;
+        }
+
+        .game {
+          width: 100vw;
+          height: 100vh;
+
+          max-width: none;
+
+          aspect-ratio: auto;
+
+          overflow: hidden;
+        }
+
+        /* ---------- SKY ---------- */
+
+        .sun {
+          width: 90px;
+          height: 90px;
+
+          right: 35px;
+          top: 95px;
+        }
+
+        .moon {
+          width: 65px;
+          height: 65px;
+
+          right: 45px;
+          top: 105px;
+        }
+
+        .moon::after {
+          width: 62px;
+          height: 62px;
+
+          left: 18px;
+          top: -7px;
+        }
+
+        /* ---------- BACKGROUND ---------- */
+
+        .mountains {
+          bottom: 135px;
+
+          height: 220px;
+        }
+
+        .mountain {
+          border-left-width: 150px;
+          border-right-width: 150px;
+
+          border-bottom-width: 220px;
+        }
+
+        .m1 {
+          left: -110px;
+        }
+
+        .m2 {
+          left: 100px;
+        }
+
+        .m3 {
+          right: -120px;
+        }
+
+        .m4 {
+          right: 90px;
+        }
+
+        .forest {
+          bottom: 95px;
+
+          height: 150px;
+        }
+
+        .tree {
+          border-left-width: 35px;
+          border-right-width: 35px;
+
+          border-bottom-width: 120px;
+        }
+
+        .ground {
+          height: 100px;
+        }
+
+        /* ---------- HUD ---------- */
+
+        .hud {
+          left: 12px;
+          right: 12px;
+          top: 15px;
+
+          align-items: flex-start;
+        }
+
+        .player {
+          width: 34vw;
+          max-width: 180px;
+        }
+
+        .player-name {
+          font-size: clamp(11px, 3.5vw, 19px);
+
+          line-height: 1.1;
+
+          margin-bottom: 6px;
+
+          white-space: nowrap;
+
+          overflow: visible;
+        }
+
+        .hp {
+          height: 16px;
+
+          padding: 2px;
+
+          border-width: 2px;
+        }
+
+        .round {
+          padding: 6px 9px;
+
+          font-size: 11px;
+
+          border-width: 1px;
+
+          white-space: nowrap;
+        }
+
+        /* ---------- CHARACTERS ---------- */
+
+        .character {
+          width: 210px;
+          height: 245px;
+
+          bottom: 90px;
+        }
+
+        .potato {
+          left: -25px;
+        }
+
+        .avocado {
+          right: -25px;
+        }
+
+        /* ---------- WINNER ---------- */
+
+        .winner-screen {
+          padding: 20px;
+
+          text-align: center;
+        }
+
+        .winner-title {
+          font-size: clamp(38px, 11vw, 65px);
+
+          line-height: 1.05;
+        }
+
+        .play-again {
+          margin-top: 25px;
+
+          padding: 14px 27px;
+
+          font-size: 17px;
+        }
+
+        /* ---------- START ---------- */
+
+        .start-button {
+          padding: 17px 30px;
+
+          font-size: 21px;
+        }
+
+        /* ---------- MUSIC ---------- */
+
+        .music {
+          bottom: 12px;
+
+          font-size: 10px;
+
+          padding: 6px 10px;
+
+          white-space: nowrap;
+        }
+
+        /* ---------- LEAVES ---------- */
+
+        .leaf {
+          width: 13px;
+          height: 7px;
+        }
+      }
+
+      /* =========================================
+   📱 VERY SMALL PHONES
+   ========================================= */
+
+      @media (max-width: 380px) {
+        .player-name {
+          font-size: 10px;
+        }
+
+        .round {
+          font-size: 9px;
+
+          padding: 5px 7px;
+        }
+
+        .character {
+          width: 175px;
+          height: 205px;
+
+          bottom: 85px;
+        }
+
+        .potato {
+          left: -35px;
+        }
+
+        .avocado {
+          right: -35px;
+        }
+
+        .music {
+          display: none;
+        }
+
+        .winner-title {
+          font-size: 36px;
+        }
+
+        .play-again {
+          font-size: 15px;
+
+          padding: 12px 22px;
+        }
+      }
+
+      /* =========================================
+   📱 LANDSCAPE PHONE
+   ========================================= */
+
+      @media (max-width: 900px) and (orientation: landscape) {
+        .game {
+          width: 100vw;
+          height: 100vh;
+        }
+
+        .character {
+          width: 220px;
+          height: 255px;
+
+          bottom: 75px;
+        }
+
+        .potato {
+          left: 15px;
+        }
+
+        .avocado {
+          right: 15px;
+        }
+
+        .ground {
+          height: 75px;
+        }
+
+        .forest {
+          bottom: 70px;
+        }
+
+        .mountains {
+          bottom: 100px;
+        }
+
+        .hud {
+          top: 10px;
+        }
+
+        .player-name {
+          font-size: 15px;
+        }
+
+        .hp {
+          height: 15px;
+        }
       }
     </style>
   </head>
 
   <body>
     <div class="game" id="game">
+      <!-- NIGHT -->
       <div class="sky-night"></div>
 
+      <!-- STARS -->
       <div class="stars">
         <span class="star" style="left: 8%; top: 12%"></span>
         <span class="star" style="left: 18%; top: 20%"></span>
@@ -722,7 +1202,10 @@
       </div>
 
       <div class="sun"></div>
+
       <div class="moon"></div>
+
+      <!-- MOUNTAINS -->
 
       <div class="mountains">
         <div class="mountain m1"></div>
@@ -730,6 +1213,8 @@
         <div class="mountain m3"></div>
         <div class="mountain m4"></div>
       </div>
+
+      <!-- FOREST -->
 
       <div class="forest">
         <div class="tree t1"></div>
@@ -744,6 +1229,7 @@
       <div class="ground"></div>
 
       <!-- FALLING LEAVES -->
+
       <div class="leaves">
         <span class="leaf"></span>
         <span class="leaf"></span>
@@ -753,10 +1239,14 @@
         <span class="leaf"></span>
       </div>
 
-      <!-- HUD -->
+      <!-- =================================
+         HUD
+         ================================= -->
+
       <div class="hud">
         <div class="player">
-          <div class="player-name">🥔 Картошкин Jiří</div>
+          <div class="player-name">🥔 картошкин Jiří</div>
+
           <div class="hp">
             <div class="hp-inner" id="potatoHP"></div>
           </div>
@@ -765,34 +1255,48 @@
         <div class="round" id="roundText">ROUND 1</div>
 
         <div class="player right">
-          <div class="player-name">🥑 @вокадич Guakamol</div>
+          <div class="player-name">🥑 авокадич Guakamol</div>
+
           <div class="hp">
             <div class="hp-inner" id="avocadoHP"></div>
           </div>
         </div>
       </div>
 
-      <!-- POTATO -->
+      <!-- =================================
+         POTATO
+         ================================= -->
+
       <div class="character potato" id="potato">
         <svg viewBox="0 0 300 350">
           <!-- body -->
+
           <ellipse cx="145" cy="190" rx="90" ry="120" class="potato-body" />
 
           <!-- spots -->
+
           <circle cx="105" cy="120" r="7" fill="#704126" />
+
           <circle cx="175" cy="145" r="6" fill="#704126" />
+
           <circle cx="120" cy="230" r="5" fill="#704126" />
+
           <circle cx="170" cy="270" r="8" fill="#704126" />
 
-          <!-- eyes -->
+          <!-- normal eyes -->
+
           <g class="normal-eyes">
             <circle cx="115" cy="165" r="12" class="eye" />
+
             <circle cx="175" cy="165" r="12" class="eye" />
+
             <circle cx="111" cy="161" r="4" fill="white" />
+
             <circle cx="171" cy="161" r="4" fill="white" />
           </g>
 
           <!-- dead X eyes -->
+
           <g
             class="dead-eyes"
             stroke="#171218"
@@ -800,27 +1304,34 @@
             stroke-linecap="round"
           >
             <line x1="103" y1="153" x2="127" y2="177" />
+
             <line x1="127" y1="153" x2="103" y2="177" />
+
             <line x1="163" y1="153" x2="187" y2="177" />
+
             <line x1="187" y1="153" x2="163" y2="177" />
           </g>
 
           <!-- mouth -->
+
           <ellipse cx="145" cy="215" rx="25" ry="13" class="mouth" />
 
           <!-- gun -->
+
           <rect x="205" y="190" width="85" height="24" rx="7" class="gun" />
 
           <rect x="230" y="212" width="18" height="45" class="gun-handle" />
 
           <!-- flash -->
+
           <polygon
             class="muzzle-flash"
             points="290,180 310,202 290,224 300,202"
             fill="#ffe05a"
           />
 
-          <!-- tear -->
+          <!-- tears -->
+
           <ellipse
             class="tear"
             cx="115"
@@ -841,41 +1352,56 @@
         </svg>
       </div>
 
-      <!-- AVOCADO -->
+      <!-- =================================
+         AVOCADO
+         ================================= -->
+
       <div class="character avocado" id="avocado">
         <svg viewBox="0 0 300 350">
           <!-- shell -->
+
           <path
-            d="M150 40
-                   C80 40 38 115 50 205
-                   C62 290 105 320 150 320
-                   C195 320 238 290 250 205
-                   C262 115 220 40 150 40Z"
+            d="
+                    M150 40
+                    C80 40 38 115 50 205
+                    C62 290 105 320 150 320
+                    C195 320 238 290 250 205
+                    C262 115 220 40 150 40Z
+                "
             class="avocado-shell"
           />
 
           <!-- flesh -->
+
           <path
-            d="M150 55
-                   C94 55 55 120 67 200
-                   C78 267 112 294 150 294
-                   C188 294 222 267 233 200
-                   C245 120 206 55 150 55Z"
+            d="
+                    M150 55
+                    C94 55 55 120 67 200
+                    C78 267 112 294 150 294
+                    C188 294 222 267 233 200
+                    C245 120 206 55 150 55Z
+                "
             class="avocado-flesh"
           />
 
           <!-- pit -->
+
           <circle cx="150" cy="245" r="43" class="pit" />
 
-          <!-- eyes -->
+          <!-- normal eyes -->
+
           <g class="normal-eyes">
             <circle cx="112" cy="145" r="12" class="eye" />
+
             <circle cx="188" cy="145" r="12" class="eye" />
+
             <circle cx="108" cy="141" r="4" fill="white" />
+
             <circle cx="184" cy="141" r="4" fill="white" />
           </g>
 
           <!-- dead eyes -->
+
           <g
             class="dead-eyes"
             stroke="#171218"
@@ -883,15 +1409,20 @@
             stroke-linecap="round"
           >
             <line x1="99" y1="133" x2="125" y2="158" />
+
             <line x1="125" y1="133" x2="99" y2="158" />
+
             <line x1="175" y1="133" x2="201" y2="158" />
+
             <line x1="201" y1="133" x2="175" y2="158" />
           </g>
 
           <!-- mouth -->
+
           <ellipse cx="150" cy="185" rx="27" ry="15" class="mouth" />
 
           <!-- scream -->
+
           <ellipse
             class="scream"
             cx="150"
@@ -901,14 +1432,18 @@
             fill="#16090c"
           />
 
-          <!-- avocado gun -->
+          <!-- gun -->
+
           <rect x="5" y="180" width="75" height="23" rx="7" class="gun" />
 
           <rect x="50" y="200" width="18" height="45" class="gun-handle" />
         </svg>
       </div>
 
-      <!-- BULLETS -->
+      <!-- =================================
+         BULLETS
+         ================================= -->
+
       <svg
         id="bulletLayer"
         viewBox="0 0 1200 675"
@@ -926,14 +1461,22 @@
         <circle id="bulletLeft" class="bullet" cx="845" cy="425" r="8" />
       </svg>
 
+      <!-- MUSIC -->
+
       <div class="music">🎵 Сентябрь горит — убийца плачет</div>
 
-      <!-- START -->
+      <!-- =================================
+         START
+         ================================= -->
+
       <div class="start-screen" id="startScreen">
         <button class="start-button" id="startButton">🎮 START DUEL</button>
       </div>
 
-      <!-- WINNER -->
+      <!-- =================================
+         WINNER
+         ================================= -->
+
       <div class="winner-screen" id="winnerScreen">
         <div class="winner-title" id="winnerTitle"></div>
 
@@ -941,57 +1484,71 @@
       </div>
     </div>
 
+    <!-- MUSIC FILE -->
+
     <audio id="music" src="september.mp3" loop preload="auto"></audio>
 
     <script>
       const game = document.getElementById("game");
 
       const potato = document.getElementById("potato");
+
       const avocado = document.getElementById("avocado");
 
       const potatoHP = document.getElementById("potatoHP");
+
       const avocadoHP = document.getElementById("avocadoHP");
 
       const bulletRight = document.getElementById("bulletRight");
+
       const bulletLeft = document.getElementById("bulletLeft");
 
       const startScreen = document.getElementById("startScreen");
+
       const startButton = document.getElementById("startButton");
 
       const winnerScreen = document.getElementById("winnerScreen");
+
       const winnerTitle = document.getElementById("winnerTitle");
+
       const playAgain = document.getElementById("playAgain");
 
       const music = document.getElementById("music");
 
       let winner;
+
       let gameStarted = false;
 
-      /* -------------------------
+      /* =========================================
    RANDOM WINNER
-------------------------- */
+   ========================================= */
 
       function chooseWinner() {
         winner = Math.random() < 0.5 ? "potato" : "avocado";
 
-        console.log("Winner:", winner);
+        console.log("Random winner:", winner);
       }
 
-      /* -------------------------
+      /* =========================================
    RESET ROUND
-------------------------- */
+   ========================================= */
 
       function resetRound() {
         gameStarted = false;
 
         potato.className = "character potato";
+
         avocado.className = "character avocado";
 
         potatoHP.style.width = "100%";
+
         avocadoHP.style.width = "100%";
 
         bulletRight.classList.remove("visible");
+
         bulletLeft.classList.remove("visible");
+
+        bulletLeft.style.transform = "";
 
         winnerScreen.classList.remove("show");
 
@@ -1000,9 +1557,9 @@
         chooseWinner();
       }
 
-      /* -------------------------
+      /* =========================================
    POTATO WINS
-------------------------- */
+   ========================================= */
 
       function potatoWins() {
         potato.classList.add("shooting");
@@ -1027,12 +1584,12 @@
           potato.classList.add("crying");
         }, 1300);
 
-        finishRound("🥔 КАРТОПЛЯ WIN! 🏆");
+        finishRound("🥔 картошкин Jiří WIN! 🏆");
       }
 
-      /* -------------------------
+      /* =========================================
    AVOCADO WINS
-------------------------- */
+   ========================================= */
 
       function avocadoWins() {
         avocado.classList.add("shooting");
@@ -1059,12 +1616,12 @@
           avocado.classList.add("crying");
         }, 1300);
 
-        finishRound("🥑 АВОКАДО WIN! 🏆");
+        finishRound("🥑 авокадич Guakamol WIN! 🏆");
       }
 
-      /* -------------------------
+      /* =========================================
    FINISH
-------------------------- */
+   ========================================= */
 
       function finishRound(text) {
         setTimeout(() => {
@@ -1076,12 +1633,14 @@
         }, 2200);
       }
 
-      /* -------------------------
-   START
-------------------------- */
+      /* =========================================
+   START GAME
+   ========================================= */
 
       function startGame() {
-        if (gameStarted) return;
+        if (gameStarted) {
+          return;
+        }
 
         gameStarted = true;
 
@@ -1098,11 +1657,15 @@
         }, 1800);
       }
 
-      /* -------------------------
-   BUTTONS
-------------------------- */
+      /* =========================================
+   START BUTTON
+   ========================================= */
 
       startButton.addEventListener("click", startGame);
+
+      /* =========================================
+   PLAY AGAIN
+   ========================================= */
 
       playAgain.addEventListener("click", () => {
         resetRound();
@@ -1112,15 +1675,16 @@
         }, 400);
       });
 
-      /* -------------------------
+      /* =========================================
    AUTOPLAY
-------------------------- */
+   ========================================= */
 
       window.addEventListener("load", () => {
         resetRound();
 
         music
           .play()
+
           .then(() => {
             startScreen.classList.add("hidden");
 
@@ -1128,11 +1692,14 @@
               startGame();
             }, 800);
           })
+
           .catch(() => {
             /*
-             Браузер заблокував autoplay.
-             Тоді залишаємо START DUEL.
-            */
+                    Браузер заблокував
+                    автоматичний запуск музики.
+
+                    Тоді показуємо START DUEL.
+                */
 
             startScreen.classList.remove("hidden");
           });
