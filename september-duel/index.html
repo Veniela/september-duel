@@ -1,0 +1,1142 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>September Duel</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        background: #130d19;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .game {
+        position: relative;
+        width: min(1200px, 100vw);
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: linear-gradient(
+          to bottom,
+          #30234c 0%,
+          #8d4d55 42%,
+          #d98552 68%,
+          #4b2c2b 100%
+        );
+      }
+
+      /* ---------- SKY ---------- */
+
+      .sky-night {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background: linear-gradient(
+          to bottom,
+          #090d27 0%,
+          #17173c 55%,
+          #312044 100%
+        );
+        transition: opacity 3s ease;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .game.night .sky-night {
+        opacity: 1;
+      }
+
+      .sun {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        right: 100px;
+        top: 80px;
+        background: #ffb35c;
+        box-shadow: 0 0 50px #ff9c4b;
+        transition: opacity 3s ease;
+        z-index: 2;
+      }
+
+      .game.night .sun {
+        opacity: 0;
+      }
+
+      .moon {
+        position: absolute;
+        width: 95px;
+        height: 95px;
+        right: 125px;
+        top: 95px;
+        border-radius: 50%;
+        background: #fff4c9;
+        box-shadow: 0 0 35px rgba(255, 244, 201, 0.7);
+        opacity: 0;
+        transition: opacity 3s ease;
+        z-index: 3;
+      }
+
+      .game.night .moon {
+        opacity: 1;
+      }
+
+      .moon::after {
+        content: "";
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        left: 25px;
+        top: -10px;
+        border-radius: 50%;
+        background: #10132f;
+      }
+
+      .stars {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 3s ease;
+        z-index: 2;
+      }
+
+      .game.night .stars {
+        opacity: 1;
+      }
+
+      .star {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 0 8px white;
+        animation: twinkle 1.5s infinite alternate;
+      }
+
+      @keyframes twinkle {
+        from {
+          opacity: 0.3;
+          transform: scale(0.7);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.3);
+        }
+      }
+
+      /* ---------- BACKGROUND ---------- */
+
+      .mountains {
+        position: absolute;
+        bottom: 150px;
+        left: 0;
+        width: 100%;
+        height: 250px;
+        z-index: 3;
+      }
+
+      .mountain {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-left: 230px solid transparent;
+        border-right: 230px solid transparent;
+        border-bottom: 300px solid #37283a;
+      }
+
+      .m1 {
+        left: -100px;
+      }
+      .m2 {
+        left: 280px;
+        border-bottom-color: #302337;
+      }
+      .m3 {
+        right: -80px;
+        border-bottom-color: #34253a;
+      }
+      .m4 {
+        right: 260px;
+        border-bottom-color: #3c2940;
+      }
+
+      .forest {
+        position: absolute;
+        bottom: 100px;
+        left: 0;
+        width: 100%;
+        height: 170px;
+        z-index: 4;
+      }
+
+      .tree {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-left: 45px solid transparent;
+        border-right: 45px solid transparent;
+        border-bottom: 150px solid #211b29;
+      }
+
+      .t1 {
+        left: 2%;
+      }
+      .t2 {
+        left: 13%;
+        transform: scale(0.8);
+      }
+      .t3 {
+        left: 27%;
+        transform: scale(1.2);
+      }
+      .t4 {
+        left: 43%;
+        transform: scale(0.75);
+      }
+      .t5 {
+        left: 58%;
+        transform: scale(1.1);
+      }
+      .t6 {
+        left: 74%;
+        transform: scale(0.8);
+      }
+      .t7 {
+        left: 88%;
+        transform: scale(1.3);
+      }
+
+      .ground {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 120px;
+        background:
+          radial-gradient(circle at 20% 30%, #a85b3d 0 2px, transparent 3px),
+          radial-gradient(circle at 70% 60%, #8d4d35 0 2px, transparent 3px),
+          #39232a;
+        z-index: 5;
+      }
+
+      /* ---------- LEAVES ---------- */
+
+      .leaves {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 20;
+      }
+
+      .leaf {
+        position: absolute;
+        width: 17px;
+        height: 9px;
+        border-radius: 100% 0 100% 0;
+        background: #d76b35;
+        animation: fall linear infinite;
+      }
+
+      .leaf:nth-child(1) {
+        left: 5%;
+        animation-duration: 6s;
+      }
+
+      .leaf:nth-child(2) {
+        left: 20%;
+        animation-duration: 8s;
+        animation-delay: -2s;
+        background: #e09a3e;
+      }
+
+      .leaf:nth-child(3) {
+        left: 35%;
+        animation-duration: 7s;
+        animation-delay: -4s;
+        background: #b74b32;
+      }
+
+      .leaf:nth-child(4) {
+        left: 55%;
+        animation-duration: 9s;
+        animation-delay: -1s;
+        background: #df8b39;
+      }
+
+      .leaf:nth-child(5) {
+        left: 75%;
+        animation-duration: 6.5s;
+        animation-delay: -3s;
+        background: #c95d30;
+      }
+
+      .leaf:nth-child(6) {
+        left: 92%;
+        animation-duration: 8.5s;
+        animation-delay: -5s;
+        background: #e1a043;
+      }
+
+      @keyframes fall {
+        0% {
+          top: -30px;
+          transform: translateX(0) rotate(0deg);
+        }
+        50% {
+          transform: translateX(100px) rotate(180deg);
+        }
+        100% {
+          top: 100%;
+          transform: translateX(-100px) rotate(360deg);
+        }
+      }
+
+      /* ---------- HUD ---------- */
+
+      .hud {
+        position: absolute;
+        left: 35px;
+        right: 35px;
+        top: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 50;
+        color: white;
+        font-weight: 900;
+      }
+
+      .player {
+        width: 310px;
+      }
+
+      .player-name {
+        font-size: 24px;
+        margin-bottom: 8px;
+        text-shadow: 0 3px 4px #000;
+      }
+
+      .hp {
+        height: 24px;
+        padding: 3px;
+        background: #160f16;
+        border: 3px solid #fff1cf;
+        border-radius: 20px;
+        box-shadow: 0 4px 12px #0008;
+      }
+
+      .hp-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background: #63d45d;
+        transition: width 0.7s ease;
+      }
+
+      .player.right {
+        text-align: right;
+      }
+
+      .player.right .hp-inner {
+        margin-left: auto;
+      }
+
+      .round {
+        padding: 9px 18px;
+        background: rgba(20, 12, 20, 0.65);
+        border: 2px solid #ffe4b0;
+        border-radius: 14px;
+        font-size: 17px;
+      }
+
+      /* ---------- CHARACTERS ---------- */
+
+      .character {
+        position: absolute;
+        bottom: 120px;
+        width: 300px;
+        height: 350px;
+        z-index: 10;
+      }
+
+      .potato {
+        left: 70px;
+      }
+
+      .avocado {
+        right: 70px;
+      }
+
+      .character svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .potato-body {
+        fill: #b8793f;
+        stroke: #633b25;
+        stroke-width: 7;
+      }
+
+      .avocado-shell {
+        fill: #244f32;
+        stroke: #10291a;
+        stroke-width: 7;
+      }
+
+      .avocado-flesh {
+        fill: #9ecb63;
+        stroke: #487c35;
+        stroke-width: 5;
+      }
+
+      .pit {
+        fill: #9a5b31;
+        stroke: #60361e;
+        stroke-width: 5;
+      }
+
+      .eye {
+        fill: #171218;
+      }
+
+      .mouth {
+        fill: #2a1114;
+      }
+
+      /* ---------- GUNS ---------- */
+
+      .gun {
+        fill: #34313b;
+        stroke: #17151b;
+        stroke-width: 5;
+      }
+
+      .gun-handle {
+        fill: #25222b;
+      }
+
+      .bullet {
+        fill: #ffe15a;
+        stroke: #ff9e28;
+        stroke-width: 3;
+        opacity: 0;
+      }
+
+      .bullet.visible {
+        animation: shootBullet 0.9s linear forwards;
+      }
+
+      @keyframes shootBullet {
+        0% {
+          opacity: 1;
+          transform: translateX(0) scale(0.6);
+        }
+
+        70% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+          transform: translateX(510px) scale(1.3);
+        }
+      }
+
+      /* ---------- HIT ---------- */
+
+      .damage {
+        animation: damage 0.15s 5;
+      }
+
+      @keyframes damage {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+
+        50% {
+          transform: translateX(-12px);
+        }
+      }
+
+      .dead {
+        animation: die 0.8s forwards;
+      }
+
+      @keyframes die {
+        0% {
+          transform: rotate(0) translateY(0);
+        }
+
+        100% {
+          transform: rotate(75deg) translateY(90px);
+          opacity: 0.45;
+        }
+      }
+
+      .dead-eyes {
+        display: none;
+      }
+
+      .character.dead .normal-eyes {
+        display: none;
+      }
+
+      .character.dead .dead-eyes {
+        display: block;
+      }
+
+      .character.dead .mouth {
+        fill: #12080a;
+      }
+
+      .scream {
+        opacity: 0;
+      }
+
+      .character.damage .scream {
+        animation: scream 0.7s forwards;
+      }
+
+      @keyframes scream {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+
+        30% {
+          opacity: 1;
+          transform: scale(1.3);
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+
+      /* ---------- CRY ---------- */
+
+      .tear {
+        opacity: 0;
+      }
+
+      .character.crying .tear {
+        animation: cry 1s infinite alternate;
+      }
+
+      @keyframes cry {
+        from {
+          opacity: 0;
+          transform: translateY(0);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(18px);
+        }
+      }
+
+      /* ---------- FLASH ---------- */
+
+      .muzzle-flash {
+        opacity: 0;
+      }
+
+      .character.shooting .muzzle-flash {
+        animation: flash 0.35s ease-out;
+      }
+
+      @keyframes flash {
+        0% {
+          opacity: 1;
+          transform: scale(0.5);
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(2);
+        }
+      }
+
+      /* ---------- WINNER ---------- */
+
+      .winner-screen {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(10, 7, 18, 0.72);
+        backdrop-filter: blur(5px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.7s ease;
+        z-index: 100;
+      }
+
+      .winner-screen.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .winner-title {
+        color: #fff1c9;
+        font-size: clamp(42px, 8vw, 90px);
+        font-weight: 1000;
+        text-align: center;
+        text-shadow:
+          0 6px 0 #351b20,
+          0 0 25px #ffb04c,
+          0 0 60px #ff7d3c;
+        animation: winnerPop 0.8s cubic-bezier(0.17, 0.67, 0.32, 1.3);
+      }
+
+      @keyframes winnerPop {
+        from {
+          transform: scale(0.2) rotate(-10deg);
+        }
+
+        to {
+          transform: scale(1) rotate(0);
+        }
+      }
+
+      .play-again {
+        margin-top: 30px;
+        border: 0;
+        border-radius: 15px;
+        padding: 16px 34px;
+        background: #ffb347;
+        color: #29151b;
+        font-size: 20px;
+        font-weight: 900;
+        cursor: pointer;
+        box-shadow: 0 7px 0 #8d492d;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+
+      .play-again:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 0 #8d492d;
+      }
+
+      .play-again:active {
+        transform: translateY(5px);
+        box-shadow: 0 2px 0 #8d492d;
+      }
+
+      /* ---------- START ---------- */
+
+      .start-screen {
+        position: absolute;
+        inset: 0;
+        z-index: 120;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(10, 7, 18, 0.55);
+      }
+
+      .start-button {
+        border: 0;
+        border-radius: 20px;
+        padding: 20px 42px;
+        background: #ffe09a;
+        color: #301a1d;
+        font-size: 26px;
+        font-weight: 1000;
+        cursor: pointer;
+        box-shadow:
+          0 8px 0 #9c5734,
+          0 0 40px rgba(255, 180, 80, 0.5);
+        animation: pulse 1.3s infinite alternate;
+      }
+
+      @keyframes pulse {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.06);
+        }
+      }
+
+      .start-screen.hidden {
+        display: none;
+      }
+
+      /* ---------- MUSIC ---------- */
+
+      .music {
+        position: absolute;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        z-index: 60;
+        padding: 8px 15px;
+        border-radius: 20px;
+        background: rgba(15, 10, 15, 0.55);
+        color: white;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="game" id="game">
+      <div class="sky-night"></div>
+
+      <div class="stars">
+        <span class="star" style="left: 8%; top: 12%"></span>
+        <span class="star" style="left: 18%; top: 20%"></span>
+        <span class="star" style="left: 30%; top: 9%"></span>
+        <span class="star" style="left: 42%; top: 17%"></span>
+        <span class="star" style="left: 57%; top: 8%"></span>
+        <span class="star" style="left: 68%; top: 23%"></span>
+        <span class="star" style="left: 82%; top: 12%"></span>
+        <span class="star" style="left: 92%; top: 28%"></span>
+      </div>
+
+      <div class="sun"></div>
+      <div class="moon"></div>
+
+      <div class="mountains">
+        <div class="mountain m1"></div>
+        <div class="mountain m2"></div>
+        <div class="mountain m3"></div>
+        <div class="mountain m4"></div>
+      </div>
+
+      <div class="forest">
+        <div class="tree t1"></div>
+        <div class="tree t2"></div>
+        <div class="tree t3"></div>
+        <div class="tree t4"></div>
+        <div class="tree t5"></div>
+        <div class="tree t6"></div>
+        <div class="tree t7"></div>
+      </div>
+
+      <div class="ground"></div>
+
+      <!-- FALLING LEAVES -->
+      <div class="leaves">
+        <span class="leaf"></span>
+        <span class="leaf"></span>
+        <span class="leaf"></span>
+        <span class="leaf"></span>
+        <span class="leaf"></span>
+        <span class="leaf"></span>
+      </div>
+
+      <!-- HUD -->
+      <div class="hud">
+        <div class="player">
+          <div class="player-name">🥔 КАРТОПЛЯ</div>
+          <div class="hp">
+            <div class="hp-inner" id="potatoHP"></div>
+          </div>
+        </div>
+
+        <div class="round" id="roundText">ROUND 1</div>
+
+        <div class="player right">
+          <div class="player-name">🥑 АВОКАДО</div>
+          <div class="hp">
+            <div class="hp-inner" id="avocadoHP"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POTATO -->
+      <div class="character potato" id="potato">
+        <svg viewBox="0 0 300 350">
+          <!-- body -->
+          <ellipse cx="145" cy="190" rx="90" ry="120" class="potato-body" />
+
+          <!-- spots -->
+          <circle cx="105" cy="120" r="7" fill="#704126" />
+          <circle cx="175" cy="145" r="6" fill="#704126" />
+          <circle cx="120" cy="230" r="5" fill="#704126" />
+          <circle cx="170" cy="270" r="8" fill="#704126" />
+
+          <!-- eyes -->
+          <g class="normal-eyes">
+            <circle cx="115" cy="165" r="12" class="eye" />
+            <circle cx="175" cy="165" r="12" class="eye" />
+            <circle cx="111" cy="161" r="4" fill="white" />
+            <circle cx="171" cy="161" r="4" fill="white" />
+          </g>
+
+          <!-- dead X eyes -->
+          <g
+            class="dead-eyes"
+            stroke="#171218"
+            stroke-width="9"
+            stroke-linecap="round"
+          >
+            <line x1="103" y1="153" x2="127" y2="177" />
+            <line x1="127" y1="153" x2="103" y2="177" />
+            <line x1="163" y1="153" x2="187" y2="177" />
+            <line x1="187" y1="153" x2="163" y2="177" />
+          </g>
+
+          <!-- mouth -->
+          <ellipse cx="145" cy="215" rx="25" ry="13" class="mouth" />
+
+          <!-- gun -->
+          <rect x="205" y="190" width="85" height="24" rx="7" class="gun" />
+
+          <rect x="230" y="212" width="18" height="45" class="gun-handle" />
+
+          <!-- flash -->
+          <polygon
+            class="muzzle-flash"
+            points="290,180 310,202 290,224 300,202"
+            fill="#ffe05a"
+          />
+
+          <!-- tear -->
+          <ellipse
+            class="tear"
+            cx="115"
+            cy="182"
+            rx="5"
+            ry="12"
+            fill="#66c9ff"
+          />
+
+          <ellipse
+            class="tear"
+            cx="175"
+            cy="182"
+            rx="5"
+            ry="12"
+            fill="#66c9ff"
+          />
+        </svg>
+      </div>
+
+      <!-- AVOCADO -->
+      <div class="character avocado" id="avocado">
+        <svg viewBox="0 0 300 350">
+          <!-- shell -->
+          <path
+            d="M150 40
+                   C80 40 38 115 50 205
+                   C62 290 105 320 150 320
+                   C195 320 238 290 250 205
+                   C262 115 220 40 150 40Z"
+            class="avocado-shell"
+          />
+
+          <!-- flesh -->
+          <path
+            d="M150 55
+                   C94 55 55 120 67 200
+                   C78 267 112 294 150 294
+                   C188 294 222 267 233 200
+                   C245 120 206 55 150 55Z"
+            class="avocado-flesh"
+          />
+
+          <!-- pit -->
+          <circle cx="150" cy="245" r="43" class="pit" />
+
+          <!-- eyes -->
+          <g class="normal-eyes">
+            <circle cx="112" cy="145" r="12" class="eye" />
+            <circle cx="188" cy="145" r="12" class="eye" />
+            <circle cx="108" cy="141" r="4" fill="white" />
+            <circle cx="184" cy="141" r="4" fill="white" />
+          </g>
+
+          <!-- dead eyes -->
+          <g
+            class="dead-eyes"
+            stroke="#171218"
+            stroke-width="9"
+            stroke-linecap="round"
+          >
+            <line x1="99" y1="133" x2="125" y2="158" />
+            <line x1="125" y1="133" x2="99" y2="158" />
+            <line x1="175" y1="133" x2="201" y2="158" />
+            <line x1="201" y1="133" x2="175" y2="158" />
+          </g>
+
+          <!-- mouth -->
+          <ellipse cx="150" cy="185" rx="27" ry="15" class="mouth" />
+
+          <!-- scream -->
+          <ellipse
+            class="scream"
+            cx="150"
+            cy="185"
+            rx="40"
+            ry="55"
+            fill="#16090c"
+          />
+
+          <!-- avocado gun -->
+          <rect x="5" y="180" width="75" height="23" rx="7" class="gun" />
+
+          <rect x="50" y="200" width="18" height="45" class="gun-handle" />
+        </svg>
+      </div>
+
+      <!-- BULLETS -->
+      <svg
+        id="bulletLayer"
+        viewBox="0 0 1200 675"
+        style="
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 30;
+        "
+      >
+        <circle id="bulletRight" class="bullet" cx="355" cy="425" r="8" />
+
+        <circle id="bulletLeft" class="bullet" cx="845" cy="425" r="8" />
+      </svg>
+
+      <div class="music">🎵 Сентябрь горит — убийца плачет</div>
+
+      <!-- START -->
+      <div class="start-screen" id="startScreen">
+        <button class="start-button" id="startButton">🎮 START DUEL</button>
+      </div>
+
+      <!-- WINNER -->
+      <div class="winner-screen" id="winnerScreen">
+        <div class="winner-title" id="winnerTitle"></div>
+
+        <button class="play-again" id="playAgain">🔄 PLAY AGAIN</button>
+      </div>
+    </div>
+
+    <audio id="music" src="september.mp3" loop preload="auto"></audio>
+
+    <script>
+      const game = document.getElementById("game");
+
+      const potato = document.getElementById("potato");
+      const avocado = document.getElementById("avocado");
+
+      const potatoHP = document.getElementById("potatoHP");
+      const avocadoHP = document.getElementById("avocadoHP");
+
+      const bulletRight = document.getElementById("bulletRight");
+      const bulletLeft = document.getElementById("bulletLeft");
+
+      const startScreen = document.getElementById("startScreen");
+      const startButton = document.getElementById("startButton");
+
+      const winnerScreen = document.getElementById("winnerScreen");
+      const winnerTitle = document.getElementById("winnerTitle");
+      const playAgain = document.getElementById("playAgain");
+
+      const music = document.getElementById("music");
+
+      let winner;
+      let gameStarted = false;
+
+      /* -------------------------
+   RANDOM WINNER
+------------------------- */
+
+      function chooseWinner() {
+        winner = Math.random() < 0.5 ? "potato" : "avocado";
+
+        console.log("Winner:", winner);
+      }
+
+      /* -------------------------
+   RESET ROUND
+------------------------- */
+
+      function resetRound() {
+        gameStarted = false;
+
+        potato.className = "character potato";
+        avocado.className = "character avocado";
+
+        potatoHP.style.width = "100%";
+        avocadoHP.style.width = "100%";
+
+        bulletRight.classList.remove("visible");
+        bulletLeft.classList.remove("visible");
+
+        winnerScreen.classList.remove("show");
+
+        game.classList.remove("night");
+
+        chooseWinner();
+      }
+
+      /* -------------------------
+   POTATO WINS
+------------------------- */
+
+      function potatoWins() {
+        potato.classList.add("shooting");
+
+        bulletRight.classList.remove("visible");
+
+        void bulletRight.offsetWidth;
+
+        bulletRight.classList.add("visible");
+
+        setTimeout(() => {
+          avocado.classList.add("damage");
+
+          avocadoHP.style.width = "0%";
+        }, 650);
+
+        setTimeout(() => {
+          avocado.classList.add("dead");
+        }, 950);
+
+        setTimeout(() => {
+          potato.classList.add("crying");
+        }, 1300);
+
+        finishRound("🥔 КАРТОПЛЯ WIN! 🏆");
+      }
+
+      /* -------------------------
+   AVOCADO WINS
+------------------------- */
+
+      function avocadoWins() {
+        avocado.classList.add("shooting");
+
+        bulletLeft.classList.remove("visible");
+
+        void bulletLeft.offsetWidth;
+
+        bulletLeft.style.transform = "scaleX(-1)";
+
+        bulletLeft.classList.add("visible");
+
+        setTimeout(() => {
+          potato.classList.add("damage");
+
+          potatoHP.style.width = "0%";
+        }, 650);
+
+        setTimeout(() => {
+          potato.classList.add("dead");
+        }, 950);
+
+        setTimeout(() => {
+          avocado.classList.add("crying");
+        }, 1300);
+
+        finishRound("🥑 АВОКАДО WIN! 🏆");
+      }
+
+      /* -------------------------
+   FINISH
+------------------------- */
+
+      function finishRound(text) {
+        setTimeout(() => {
+          winnerTitle.textContent = text;
+
+          winnerScreen.classList.add("show");
+
+          game.classList.add("night");
+        }, 2200);
+      }
+
+      /* -------------------------
+   START
+------------------------- */
+
+      function startGame() {
+        if (gameStarted) return;
+
+        gameStarted = true;
+
+        startScreen.classList.add("hidden");
+
+        music.play().catch(() => {});
+
+        setTimeout(() => {
+          if (winner === "potato") {
+            potatoWins();
+          } else {
+            avocadoWins();
+          }
+        }, 1800);
+      }
+
+      /* -------------------------
+   BUTTONS
+------------------------- */
+
+      startButton.addEventListener("click", startGame);
+
+      playAgain.addEventListener("click", () => {
+        resetRound();
+
+        setTimeout(() => {
+          startGame();
+        }, 400);
+      });
+
+      /* -------------------------
+   AUTOPLAY
+------------------------- */
+
+      window.addEventListener("load", () => {
+        resetRound();
+
+        music
+          .play()
+          .then(() => {
+            startScreen.classList.add("hidden");
+
+            setTimeout(() => {
+              startGame();
+            }, 800);
+          })
+          .catch(() => {
+            /*
+             Браузер заблокував autoplay.
+             Тоді залишаємо START DUEL.
+            */
+
+            startScreen.classList.remove("hidden");
+          });
+      });
+    </script>
+  </body>
+</html>
